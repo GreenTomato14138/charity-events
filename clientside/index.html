@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Guangxi Charity Events</title>
+    <meta name="description" content="Discover and register for charity events across Guangxi - fun runs, galas, auctions, concerts, craft markets and volunteer days.">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+</head>
+<body data-page="home">
+
+<!-- animated background blobs -->
+<div class="bg-fx" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+
+<!-- ============================== NAVIGATION ============================== -->
+<header class="nav">
+    <div class="wrap">
+        <a class="brand" href="index.html">
+            <span class="brand-mark"><svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true"><path d="M24 41.5C12.2 33.4 5.6 25.6 6.1 18.6 6.6 12.1 12.7 8.3 18.3 10.4 21.2 11.5 23.2 13.4 24 15.2 24.8 13.4 26.8 11.5 29.7 10.4 35.3 8.3 41.4 12.1 41.9 18.6 42.4 25.6 35.8 33.4 24 41.5Z" fill="#E0394A"/><path d="M9.4 26.4c3.4 2.6 6.8 2.6 10.2 0 3.4-2.6 6.8-2.6 10.2 0 3.4 2.6 6.8 2.6 10.2 0" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round"/><circle cx="36.6" cy="13.6" r="3.6" fill="#FFC94D"/></svg></span>
+            <span class="brand-text">
+                <b>Guangxi Charity</b>
+                <small>Charity Events Hub</small>
+            </span>
+        </a>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html" data-nav="home">Home</a>
+            <a href="search.html" data-nav="search">Search Events</a>
+            <a href="event.html" data-nav="event">Event Details</a>
+            <a href="#about">About Us</a>
+            <a href="#impact">Our Impact</a>
+        </nav>
+
+        <div class="nav-actions">
+            <span class="api-badge" id="apiStatus" title="Status of the RESTful API">
+                <span class="dot"></span> checking API…
+            </span>
+            <button class="icon-btn" id="themeToggle" title="Switch light / dark theme" aria-label="Toggle theme"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.6 8.6 0 0 1 9.4 3.8a8.6 8.6 0 1 0 10.8 10.8z"/></svg></button>
+            <button class="icon-btn hamburger" id="navToggle" aria-label="Open menu" aria-expanded="false"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4.2 7.4h15.6"/><path d="M4.2 12h11.2"/><path d="M4.2 16.6h15.6"/></svg></button>
+        </div>
+    </div>
+</header>
+
+<!-- ================================= HERO ================================= -->
+<section class="hero">
+    <div class="wrap hero-grid">
+        <div>
+            <span class="eyebrow"><span class="dot"></span> Guangxi · 14 cities · Fundraising since 2009</span>
+            <h1>Do something <span class="grad-text">extraordinary</span> for Guangxi.</h1>
+            <p class="lead">
+                Guangxi Charity Events brings together six of the province's most trusted charities and
+                the events that keep them running — from a sunrise run along the Yongjiang to a Dong
+                chorus beneath the drum tower. Pick a fun run, a gala, an auction or a craft market:
+                every ticket is a donation, and every donation stays in Guangxi.
+            </p>
+
+            <div class="hero-cta">
+                <a class="btn" href="#events"><span class="ico-slot" data-icon="spark"></span> Browse events</a>
+                <a class="btn btn-ghost" href="search.html"><span class="ico-slot" data-icon="search"></span> Search by date, place or cause</a>
+            </div>
+
+            <div class="hero-stats" id="heroStats">
+                <div class="hero-stat"><b data-counter="0" id="statUpcoming">–</b><span>Upcoming events</span></div>
+                <div class="hero-stat"><b data-counter="0" data-prefix="$" id="statRaised">–</b><span>Raised so far</span></div>
+                <div class="hero-stat"><b data-counter="0" id="statSupporters">–</b><span>Supporters</span></div>
+            </div>
+        </div>
+
+        <div class="hero-art">
+            <div class="orb a"></div>
+            <div class="orb b"></div>
+            <div class="hero-card">
+                <h4>Impact this season</h4>
+                <div class="amount grad-text" style="background:var(--grad-warm);-webkit-background-clip:text;background-clip:text;color:transparent"
+                     id="heroCardAmount">$0</div>
+                <p style="font-size:13.5px;color:var(--muted);margin:6px 0 0">
+                    raised across <b id="heroCardEvents">0</b> active events
+                </p>
+                <div class="progress" style="margin-top:14px">
+                    <div class="progress-top"><span>Season goal</span><span id="heroCardPct">0%</span></div>
+                    <div class="bar"><i data-pct="0" id="heroCardBar" style="width:0"></i></div>
+                </div>
+                <a class="btn btn-sm btn-block" href="#impact" style="margin-top:16px">See where it goes</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================ FEATURED SLIDER =========================== -->
+<section class="section" style="padding-top:0">
+    <div class="wrap">
+        <div class="section-head">
+            <div>
+                <h2>Featured right now <span class="ico-slot" data-icon="spark"></span></h2>
+                <p>The three events closest to kicking off. Data loaded live from <code>GET /api/events/featured</code>.</p>
+            </div>
+        </div>
+
+        <div class="carousel" id="featuredCarousel">
+            <div class="carousel-track" id="featuredTrack"></div>
+            <button class="carousel-btn prev" id="carouselPrev" aria-label="Previous event">‹</button>
+            <button class="carousel-btn next" id="carouselNext" aria-label="Next event">›</button>
+            <div class="carousel-dots" id="carouselDots"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================ EVENT LISTING ============================= -->
+<section class="section" id="events">
+    <div class="wrap">
+        <div class="section-head">
+            <div>
+                <h2>Upcoming charity events</h2>
+                <p>
+                    Everything below is rendered from <code>GET /api/events</code>. Events whose date has
+                    passed are automatically marked <b>past</b>, and events suspended for a policy breach
+                    are never published.
+                </p>
+            </div>
+            <div class="chips" id="scopeChips" style="margin:0">
+                <button class="chip active" data-scope="upcoming"><span class="ico-slot" data-icon="compass"></span> Upcoming</button>
+                <button class="chip" data-scope="past"><span class="ico-slot" data-icon="calendar"></span> Past events</button>
+                <button class="chip" data-scope="all"><span class="ico-slot" data-icon="folder"></span> All events</button>
+            </div>
+        </div>
+
+        <div class="chips" id="categoryChips">
+            <span class="chip active" data-category="all">All categories</span>
+        </div>
+
+        <div class="card-grid" id="eventGrid"></div>
+    </div>
+</section>
+
+<!-- =============================== MARQUEE ================================ -->
+<div class="marquee" id="donorMarquee" aria-hidden="true">
+    <div class="marquee-track" id="donorTrack"></div>
+</div>
+
+<!-- =============================== IMPACT ================================= -->
+<section class="section" id="impact">
+    <div class="wrap">
+        <div class="impact">
+            <div class="impact-grid">
+                <div><b data-counter="0" data-prefix="$" id="impactRaised">0</b><span>Raised</span></div>
+                <div><b data-counter="0" id="impactSupporters">0</b><span>Supporters</span></div>
+                <div><b data-counter="0" id="impactEvents">0</b><span>Events run</span></div>
+                <div><b data-counter="0" id="impactOrgs">0</b><span>Charities</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================ ABOUT ================================= -->
+<section class="section" id="about">
+    <div class="wrap">
+        <div class="section-head">
+            <div>
+                <h2>Who we are</h2>
+                <p>Some background information about the organisation, shown on the home page.</p>
+            </div>
+        </div>
+
+        <div class="card-grid">
+            <div class="card reveal">
+                <div style="font-size:34px"><span class="ico-slot" data-icon="spark"></span></div>
+                <h3>Our mission</h3>
+                <p>
+                    To make giving easy, transparent and genuinely fun. We connect neighbours, schools and
+                    local businesses with the charities doing the unglamorous, essential work — and we
+                    publish exactly where every dollar ends up.
+                </p>
+            </div>
+            <div class="card reveal">
+                <div style="font-size:34px"><span class="ico-slot" data-icon="users"></span></div>
+                <h3>How it works</h3>
+                <p>
+                    Charities publish an event, the public browses and registers, and 100% of the ticket
+                    price goes to the cause. Corporate partners match community donations dollar for
+                    dollar at the end of each month.
+                </p>
+            </div>
+            <div class="card reveal">
+                <div style="font-size:34px"><span class="ico-slot" data-icon="charity"></span></div>
+                <h3>Our promise</h3>
+                <p>
+                    Every event is reviewed against our fundraising policy before it goes live. Anything
+                    that breaches the policy is suspended immediately and removed from all public pages.
+                </p>
+            </div>
+        </div>
+
+        <div class="panel reveal" style="margin-top:26px">
+            <div class="form-grid">
+                <div class="fact-list">
+                    <div class="fact"><span class="ic"><span class="ico-slot" data-icon="mail"></span></span><div><b>Email</b><span data-org-email></span></div></div>
+                    <div class="fact"><span class="ic"><span class="ico-slot" data-icon="phone"></span></span><div><b>Phone</b><span data-org-phone></span></div></div>
+                </div>
+                <div class="fact-list">
+                    <div class="fact"><span class="ic"><span class="ico-slot" data-icon="pin"></span></span><div><b>Office</b><span data-org-address></span></div></div>
+                    <div class="fact"><span class="ic"><span class="ico-slot" data-icon="compass"></span></span><div><b>Opening hours</b><span>Mon–Fri, 9:00 am – 5:00 pm AEST</span></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =============================== FOOTER ================================= -->
+<footer class="footer">
+    <div class="wrap">
+        <div class="footer-grid">
+            <div>
+                <h4 data-org-name>Guangxi Charity</h4>
+                <p style="font-size:14px;color:var(--muted);margin-top:10px">
+                    A community platform connecting Guangxi residents with the charity events that
+                    fund local services. Built for PROG2002 Web Development II.
+                </p>
+                <div class="hero-tags" style="margin-top:14px">
+                    <span style="background:var(--surface-2);color:var(--ink-2);border-color:var(--line)">Node.js</span>
+                    <span style="background:var(--surface-2);color:var(--ink-2);border-color:var(--line)">Express</span>
+                    <span style="background:var(--surface-2);color:var(--ink-2);border-color:var(--line)">MySQL</span>
+                    <span style="background:var(--surface-2);color:var(--ink-2);border-color:var(--line)">Vanilla JS</span>
+                </div>
+            </div>
+
+            <div>
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="search.html">Search events</a></li>
+                    <li><a href="event.html">Event details</a></li>
+                    <li><a href="#impact">Our impact</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4>Contact</h4>
+                <ul>
+                    <li><span data-org-email></span></li>
+                    <li><span data-org-phone></span></li>
+                    <li><span data-org-address></span></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4>Event alerts</h4>
+                <p style="font-size:13.5px;color:var(--muted);margin:0 0 6px">
+                    Get a nudge when a new event is published.
+                </p>
+                <form class="newsletter" id="newsletterForm" novalidate>
+                    <input type="text" id="newsletterEmail" placeholder="you@example.com" aria-label="Email address">
+                    <button class="btn btn-sm" type="submit">Join</button>
+                </form>
+                <small class="err-msg" id="newsletterError"></small>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© <span id="year">2026</span> <span data-org-name>Guangxi Charity</span> · Registration no. 51450100MJY1234567</span>
+            <span>PROG2002 A2 · Boyuan Liu · Student ID 24832410</span>
+        </div>
+    </div>
+</footer>
+
+<!-- ============================== SCRIPTS ================================= -->
+<script src="assets/js/config.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/home.js"></script>
+</body>
+</html>

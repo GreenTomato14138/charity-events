@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Events | Guangxi Charity Events</title>
+    <meta name="description" content="Search upcoming charity events by date, location and category.">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+</head>
+<body data-page="search">
+
+<div class="bg-fx" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+
+<!-- ============================== NAVIGATION ============================== -->
+<header class="nav">
+    <div class="wrap">
+        <a class="brand" href="index.html">
+            <span class="brand-mark"><svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true"><path d="M24 41.5C12.2 33.4 5.6 25.6 6.1 18.6 6.6 12.1 12.7 8.3 18.3 10.4 21.2 11.5 23.2 13.4 24 15.2 24.8 13.4 26.8 11.5 29.7 10.4 35.3 8.3 41.4 12.1 41.9 18.6 42.4 25.6 35.8 33.4 24 41.5Z" fill="#E0394A"/><path d="M9.4 26.4c3.4 2.6 6.8 2.6 10.2 0 3.4-2.6 6.8-2.6 10.2 0 3.4 2.6 6.8 2.6 10.2 0" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round"/><circle cx="36.6" cy="13.6" r="3.6" fill="#FFC94D"/></svg></span>
+            <span class="brand-text"><b>Guangxi Charity</b><small>Charity Events Hub</small></span>
+        </a>
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html" data-nav="home">Home</a>
+            <a href="search.html" data-nav="search">Search Events</a>
+            <a href="event.html" data-nav="event">Event Details</a>
+            <a href="index.html#about">About Us</a>
+            <a href="index.html#impact">Our Impact</a>
+        </nav>
+        <div class="nav-actions">
+            <span class="api-badge" id="apiStatus"><span class="dot"></span> checking API…</span>
+            <button class="icon-btn" id="themeToggle" title="Switch light / dark theme" aria-label="Toggle theme"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.6 8.6 0 0 1 9.4 3.8a8.6 8.6 0 1 0 10.8 10.8z"/></svg></button>
+            <button class="icon-btn hamburger" id="navToggle" aria-label="Open menu" aria-expanded="false"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4.2 7.4h15.6"/><path d="M4.2 12h11.2"/><path d="M4.2 16.6h15.6"/></svg></button>
+        </div>
+    </div>
+</header>
+
+<!-- =============================== HEADER ================================= -->
+<section class="hero" style="padding-bottom:26px">
+    <div class="wrap">
+        <span class="eyebrow"><span class="dot"></span> Find your next event</span>
+        <h1 style="margin-top:16px">Search <span class="grad-text">charity events</span></h1>
+        <p class="lead">
+            Filter by <b>date</b>, <b>location</b> and <b>event category</b>. Pick as many criteria as you
+            like — the results come straight from <code>GET /api/events/search</code>.
+        </p>
+    </div>
+</section>
+
+<!-- ================================ FORM ================================== -->
+<section class="section" style="padding-top:10px">
+    <div class="wrap">
+        <form class="panel" id="searchForm" novalidate>
+            <div class="form-grid">
+                <!-- keyword -->
+                <div class="field">
+                    <label for="fKeyword"><span class="ico-slot" data-icon="search"></span> Keyword <span class="hint">(name, venue or suburb)</span></label>
+                    <input type="search" id="fKeyword" name="q" placeholder="e.g. fun run, Nanning, gala" autocomplete="off">
+                    <small class="err-msg" id="errKeyword"></small>
+                </div>
+
+                <!-- date from -->
+                <div class="field">
+                    <label for="fFrom"><span class="ico-slot" data-icon="calendar"></span> Date from</label>
+                    <input type="date" id="fFrom" name="from">
+                    <small class="err-msg" id="errFrom"></small>
+                </div>
+
+                <!-- date to -->
+                <div class="field">
+                    <label for="fTo"><span class="ico-slot" data-icon="calendar"></span> Date to</label>
+                    <input type="date" id="fTo" name="to">
+                    <small class="err-msg" id="errTo"></small>
+                </div>
+
+                <!-- location -->
+                <div class="field">
+                    <label for="fLocation"><span class="ico-slot" data-icon="pin"></span> Location <span class="hint">(suburb, venue or city)</span></label>
+                    <input type="text" id="fLocation" name="location" placeholder="e.g. Nanning, Guilin">
+                    <small class="err-msg" id="errLocation"></small>
+                </div>
+
+                <!-- sort -->
+                <div class="field">
+                    <label for="fSort"><span class="ico-slot" data-icon="menu"></span> Sort results by</label>
+                    <select id="fSort" name="sort">
+                        <option value="date">Soonest first</option>
+                        <option value="date-desc">Latest first</option>
+                        <option value="progress">Most funded (%)</option>
+                        <option value="raised">Most raised ($)</option>
+                        <option value="price">Cheapest ticket</option>
+                        <option value="name">Name (A–Z)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- categories: checkbox multi-select -->
+            <div class="field" style="margin-top:20px">
+                <label><span class="ico-slot" data-icon="ticket"></span> Event categories <span class="hint">(select one or more)</span></label>
+                <div class="check-grid" id="categoryChecks">
+                    <span class="check" style="opacity:.6">Loading categories…</span>
+                </div>
+                <small class="err-msg" id="errCategory"></small>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn" type="submit" id="btnSearch"><span class="ico-slot" data-icon="search"></span> Search events</button>
+                <button class="btn btn-ghost" type="button" id="btnClear"><span class="ico-slot" data-icon="broom"></span> Clear Filters</button>
+                <label class="switch" style="margin-left:auto">
+                    <input type="checkbox" id="fFree"> Free events only
+                </label>
+            </div>
+
+            <p style="font-size:12.5px;color:var(--muted);margin:16px 0 0" id="activeFilterSummary">
+                No filters applied — showing every upcoming event.
+            </p>
+        </form>
+    </div>
+</section>
+
+<!-- ============================== RESULTS ================================= -->
+<section class="section" style="padding-top:0">
+    <div class="wrap">
+        <div class="results-head">
+            <h2 id="resultsTitle">Upcoming events</h2>
+            <span class="count-chip" id="resultCount">Loading…</span>
+        </div>
+        <div class="card-grid" id="resultsGrid"></div>
+    </div>
+</section>
+
+<!-- =============================== FOOTER ================================= -->
+<footer class="footer">
+    <div class="wrap">
+        <div class="footer-grid">
+            <div>
+                <h4 data-org-name>Guangxi Charity</h4>
+                <p style="font-size:14px;color:var(--muted);margin-top:10px">
+                    Connecting Guangxi communities with the charity events that fund local services.
+                </p>
+            </div>
+            <div>
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="search.html">Search events</a></li>
+                    <li><a href="event.html">Event details</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <ul>
+                    <li><span data-org-email></span></li>
+                    <li><span data-org-phone></span></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Popular searches</h4>
+                <ul>
+                    <li><a href="search.html?category=fun-run">Fun runs</a></li>
+                    <li><a href="search.html?category=gala-dinner">Gala dinners</a></li>
+                    <li><a href="search.html?free=true">Free events</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© <span id="year">2026</span> <span data-org-name>Guangxi Charity</span> · Registration no. 51450100MJY1234567</span>
+            <span>PROG2002 A2 · Boyuan Liu · Student ID 24832410</span>
+        </div>
+    </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/search.js"></script>
+</body>
+</html>

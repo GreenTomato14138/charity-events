@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details | Guangxi Charity Events</title>
+    <meta name="description" content="Full details, ticket information and fundraising progress for a Guangxi charity event.">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+</head>
+<body data-page="event">
+
+<div class="bg-fx" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+
+<!-- ============================== NAVIGATION ============================== -->
+<header class="nav">
+    <div class="wrap">
+        <a class="brand" href="index.html">
+            <span class="brand-mark"><svg viewBox="0 0 48 48" width="30" height="30" aria-hidden="true"><path d="M24 41.5C12.2 33.4 5.6 25.6 6.1 18.6 6.6 12.1 12.7 8.3 18.3 10.4 21.2 11.5 23.2 13.4 24 15.2 24.8 13.4 26.8 11.5 29.7 10.4 35.3 8.3 41.4 12.1 41.9 18.6 42.4 25.6 35.8 33.4 24 41.5Z" fill="#E0394A"/><path d="M9.4 26.4c3.4 2.6 6.8 2.6 10.2 0 3.4-2.6 6.8-2.6 10.2 0 3.4 2.6 6.8 2.6 10.2 0" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round"/><circle cx="36.6" cy="13.6" r="3.6" fill="#FFC94D"/></svg></span>
+            <span class="brand-text"><b>Guangxi Charity</b><small>Charity Events Hub</small></span>
+        </a>
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html" data-nav="home">Home</a>
+            <a href="search.html" data-nav="search">Search Events</a>
+            <a href="event.html" data-nav="event">Event Details</a>
+            <a href="index.html#about">About Us</a>
+            <a href="index.html#impact">Our Impact</a>
+        </nav>
+        <div class="nav-actions">
+            <span class="api-badge" id="apiStatus"><span class="dot"></span> checking API…</span>
+            <button class="icon-btn" id="themeToggle" title="Switch light / dark theme" aria-label="Toggle theme"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.6 8.6 0 0 1 9.4 3.8a8.6 8.6 0 1 0 10.8 10.8z"/></svg></button>
+            <button class="icon-btn hamburger" id="navToggle" aria-label="Open menu" aria-expanded="false"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4.2 7.4h15.6"/><path d="M4.2 12h11.2"/><path d="M4.2 16.6h15.6"/></svg></button>
+        </div>
+    </div>
+</header>
+
+<!-- =============================== CONTENT ================================ -->
+<main class="section">
+    <div class="wrap">
+
+        <!-- breadcrumb -->
+        <nav style="font-size:13px;color:var(--muted);margin-bottom:18px" aria-label="Breadcrumb">
+            <a href="index.html">Home</a> › <a href="search.html">Search events</a> ›
+            <span id="crumbName">Event details</span>
+        </nav>
+
+        <!-- everything below is rendered from GET /api/events/:id -->
+        <div id="detailContent">
+            <div class="skeleton-card" style="padding:0">
+                <div class="sk-banner sk-line" style="margin:0;height:220px"></div>
+                <div class="sk-line w60"></div>
+                <div class="sk-line w40"></div>
+                <div class="sk-line"></div>
+                <div class="sk-line w60"></div>
+            </div>
+        </div>
+
+        <!-- related events -->
+        <div id="relatedBlock" style="margin-top:44px;display:none">
+            <div class="section-head">
+                <div>
+                    <h2>More events you might like</h2>
+                    <p>Other upcoming events in the same category.</p>
+                </div>
+                <a class="btn btn-ghost btn-sm" href="search.html">See all events</a>
+            </div>
+            <div class="card-grid" id="relatedGrid"></div>
+        </div>
+    </div>
+</main>
+
+<!-- =============================== FOOTER ================================= -->
+<footer class="footer">
+    <div class="wrap">
+        <div class="footer-grid">
+            <div>
+                <h4 data-org-name>Guangxi Charity</h4>
+                <p style="font-size:14px;color:var(--muted);margin-top:10px">
+                    Connecting Guangxi communities with the charity events that fund local services.
+                </p>
+            </div>
+            <div>
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="search.html">Search events</a></li>
+                    <li><a href="event.html">Event details</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <ul>
+                    <li><span data-org-email></span></li>
+                    <li><span data-org-phone></span></li>
+                    <li><span data-org-address></span></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Good to know</h4>
+                <ul>
+                    <li>100% of ticket sales go to the cause</li>
+                    <li>Tax receipts issued instantly</li>
+                    <li>Free events are listed too</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© <span id="year">2026</span> <span data-org-name>Guangxi Charity</span> · Registration no. 51450100MJY1234567</span>
+            <span>PROG2002 A2 · Boyuan Liu · Student ID 24832410</span>
+        </div>
+    </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/event.js"></script>
+</body>
+</html>

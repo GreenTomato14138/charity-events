@@ -1,0 +1,18 @@
+{
+  "name": "charity-events-clientside",
+  "version": "1.0.0",
+  "description": "PROG2002 A2 - client-side website for the Charity Events case study (HTML + CSS + vanilla JavaScript, no framework)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "PROG2002",
+    "charity-events",
+    "client-side",
+    "html-css-javascript"
+  ],
+  "author": "Boyuan Liu (24832410)",
+  "license": "MIT",
+  "dependencies": {}
+}
